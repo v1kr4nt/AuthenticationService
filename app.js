@@ -2,12 +2,19 @@ const express = require("express");
 const morgan = require("morgan");
 const createError = require("http-errors");
 require("dotenv").config;
+require("./helpers/init_mongodb.js");
+
+const AuthRoute = require("./routes/auth.route");
 
 const app = express();
+
+app.use(morgan("dev"));
 
 app.get("/", async (req, res, next) => {
   res.send("hello");
 });
+
+app.use("/auth", AuthRoute);
 
 app.use(async (req, res, next) => {
   next(createError.NotFound("This route does not exists"));
