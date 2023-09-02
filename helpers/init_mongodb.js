@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017", {
-    dbName: "auth-service",
+  .connect(process.env.MONGO_URI, {
+    dbName: process.env.DB_NAME,
     useNewUrlParser: true,
   })
   .then(() => {
